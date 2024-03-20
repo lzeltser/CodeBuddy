@@ -41,8 +41,12 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
       vscode.Uri.joinPath(this._extensionUri, "assets", "main.css")
     );
 
+    // inserted new images
     const background = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "background.png")
+    );
+    const dog_front = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "dog_front.png")
     );
 
     // Use a nonce to only allow a specific script to be run.
@@ -57,9 +61,23 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
 				<link href="${styleVSCodeUri}" rel="stylesheet">
         <link href="${stylesheetUri}" rel="stylesheet">
 			</head>
+        <style>
+          .bg {
+            position: relative;
+          }
+          .sprite1 {
+            position: absolute;
+            left: 100px; 
+            top: 90px;
+          }
+        </style>
 
 			<body>
-        <img src="${background}" alt="bg here">
+        <div>
+          <img src="${background}" alt="bg here" class="bg">
+          <img src="${dog_front}" alt="bg here" class="sprite1"
+                    width="40" height="80">
+        </div>
       </body>
 
 			</html>`;
