@@ -41,10 +41,11 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
       vscode.Uri.joinPath(this._extensionUri, "assets", "main.css")
     );
 
-    // inserted new images
+    // inserted bg image
     const background = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "background.png")
     );
+    // insert avatar image
     const dog_front = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "dog_front.png")
     );
@@ -82,6 +83,18 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
 
 			</html>`;
   }
+}
+
+function giveAdvice() {
+  const {activeTextEditor} = vscode.window;
+    if (!activeTextEditor) return;
+    else {
+      const lines = activeTextEditor.document.getText().split('\n');
+      for (let i = 0; i < activeTextEditor.document.lineCount; ++i) {  
+        const line = activeTextEditor.document.lineAt(i);
+        console.log(i, line);
+      }
+    }
 }
 
 function getNonce() {
