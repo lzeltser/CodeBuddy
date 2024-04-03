@@ -33,6 +33,23 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(openWebView);
+
+	const disposable = vscode.commands.registerCommand('extension.scanDocument', function () {
+        // Get the active text editor
+        const editor = vscode.window.activeTextEditor;
+
+        if (editor) {
+            let document = editor.document;
+
+            // Get the document text
+            const documentText = document.getText();
+
+            // DO SOMETHING WITH `documentText`
+			console.log(documentText);
+        }
+    });
+
+    context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
