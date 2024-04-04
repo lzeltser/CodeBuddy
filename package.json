@@ -11,8 +11,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscodeSidebar.openview",
-    "onView:vscodeSidebar.openview"
   ],
   "main": "./out/extension.js",
   "contributes": {

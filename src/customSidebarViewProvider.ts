@@ -64,43 +64,42 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
-                    <link href="${styleResetUri}" rel="stylesheet">
-                    <link href="${styleVSCodeUri}" rel="stylesheet">
-                    <link href="${stylesheetUri}" rel="stylesheet">
                     <style>
+                        .container {
+                            position: relative;
+                            width: 100%; /* Adjust as needed */
+                            height: 100%; /* Adjust as needed */
+                        }
                         .bg {
-                            position: relative;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            z-index: 1; 
                         }
-                        .sprite-container {
-                            position: relative;
-                        }
+
                         .sprite {
-                            position: relative;
+                            position: absolute;
                             left: 40%; 
                             bottom: 100px;
-                           /* z-index: 1;  Ensure the sprite is above the tips */
+                            z-index: 1;  Ensure the sprite is above the tips
                         }
                         .tip-container {
                             position: absolute;
-                            left: 10px; /* Adjust as needed */
-                            top: 10px; /* Adjust as needed */
+                            left: 10px; 
+                            top: 10px;
                             z-index: 2;
-                        }
-                        .tip {
-                            font-size: 14px;
-                            color: white;
-                            background-color: rgba(0, 0, 0, 0.5);
-                            padding: 8px;
-                            border-radius: 4px;
-                            margin-bottom: 8px;
+                            max-width: calc(100% - 20px); 
+                            overflow-y: auto; 
+                            padding: 10px;
+                            background-color: transparent !important;
                         }
                     </style>
                 </head>
                 <body>
-                    <div>
+                    <div class="container">
                         <img src="${background}" alt="bg here" class="bg">
                         <img src="${dog_front}" alt="dog sprite" class="sprite" width="40" height="80">
-                        <div class="tip-container"> 
+                        <div class="tip-container" style="background-color: transparent !important;> 
                             ${tips.map(tip => `<div class="tip">${tip}</div>`).join('')}
                         </div>
                     </div>
