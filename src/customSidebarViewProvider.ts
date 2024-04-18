@@ -40,29 +40,89 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
     const stylesheetUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "main.css")
     );
-
+    const tipsUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "tips.txt")
+    );
+    // inserted new images
     const background = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "background.png")
+    );
+   
+    const dogFrontUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "dog_front.png")
+    );
+    const dogWalk1Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "dog_walk1.png")
+    );
+    const dogWalk2Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "dog_walk2.png")
+    );
+    const dogWalkUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "dog_walk3.png")
     );
 
     // Use a nonce to only allow a specific script to be run.
     const nonce = getNonce();
 
     return `<!DOCTYPE html>
-			<html lang="en">
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <link href="${styleResetUri}" rel="stylesheet">
+      <link href="${styleVSCodeUri}" rel="stylesheet">
+      <link href="${stylesheetUri}" rel="stylesheet">
+    </head>
+    <style>
+    .bg {
+      position: relative;
+    }
+    .sprite1 {
+      position: absolute;
+      left: 100px; 
+      top: 90px;
+    }
+  </style>
+    <body>
+      <div class="bg-container">
+        <img src="${background}" alt="Background" class="bg">
+        <img id="dog" src="${dogFrontUri}" alt="Animated dog" class="sprite1" width="40" height="80">
+      </div>
+      <div id="tip" class="pixel-text">
+        <p>Tip of the minute:</p>
+        <p id="tip-content"></p>
+      </div>
+      <script nonce="${nonce}" src="${scriptUri}"></script>
+      <script nonce="${nonce}">
+        let currentFrame = 0;
+        const dogImage = document.getElementById('dog');
+        const dogFrames = ["${dogFrontUri}", "${dogWalk1Uri}", "${dogWalk2Uri}", "${dogWalkUri}"];
 
-			<head>
-				<meta charset="UTF-8">
-				<link href="${styleResetUri}" rel="stylesheet">
-				<link href="${styleVSCodeUri}" rel="stylesheet">
-        <link href="${stylesheetUri}" rel="stylesheet">
-			</head>
+        function updateFrame() {
+            dogImage.src = dogFrames[currentFrame];
+            currentFrame = (currentFrame + 1) % dogFrames.length;
+            setTimeout(updateFrame, 500); // Change frame every 500 ms
+        }
 
-			<body>
-        <img src="${background}" alt="bg here">
-      </body>
+        updateFrame();
 
-			</html>`;
+        fetch("${tipsUri}")
+            .then(response => response.text())
+            .then(text => {
+                const tips = text.split("\\n");
+                let index = 0;
+                const tipElement = document.getElementById('tip-content');
+                function displayNextTip() {
+                    if(tips[index].trim() !== "") {
+                        tipElement.textContent = tips[index];
+                    }
+                    index = (index + 1) % tips.length;
+                    setTimeout(displayNextTip, 60000); // Change tips every minute
+                }
+                displayNextTip();
+            });
+      </script>
+    </body>
+    </html>`;
   }
 }
 

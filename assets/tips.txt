@@ -1,0 +1,21 @@
+﻿Check for typos in your variable names
+Always use meaningful variable names.
+Comment your code to improve clarity and maintainability.
+Follow consistent coding style guidelines.
+Break down complex tasks into smaller, manageable functions.
+Test your code frequently to catch bugs early.
+Use version control systems like Git to track changes to your code.
+Keep your code DRY (Don't Repeat Yourself) by avoiding redundant code.
+Prioritize readability over cleverness in your code.
+Refactor code regularly to improve its structure and efficiency.
+Handle errors gracefully to provide a better user experience.
+Write documentation for your functions and classes.
+Avoid global variables whenever possible.
+Use descriptive function and variable names to make your code self-explanatory.
+Follow naming conventions specific to the programming language you're using.
+Break long lines of code into multiple lines for better readability.
+Use consistent indentation to improve code readability.
+Optimize code performance when necessary, but prioritize readability and maintainability.
+Keep your codebase organized by grouping related functions and classes.
+Write tests for critical parts of your code to ensure reliability.
+Continuously seek to improve your coding skills by learning new techniques and technologies.
