@@ -9,7 +9,7 @@ class CustomSidebarViewProvider {
     resolveWebviewView(webviewView, context, token) {
         this._view = webviewView;
         webviewView.webview.options = {
-            // Allow scripts in the webview
+            // Allow scripts in the webviews
             enableScripts: true,
             localResourceRoots: [this._extensionUri],
         };
@@ -24,7 +24,7 @@ class CustomSidebarViewProvider {
         // Same for stylesheet
         const stylesheetUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "assets", "main.css"));
         const tipsUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "assets", "tips.txt"));
-        // inserted new images
+        // inserted new image
         const background = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "assets", "background.png"));
         const dogFrontUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "assets", "dog_front.png"));
         const dogWalk1Uri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "assets", "dog_walk1.png"));

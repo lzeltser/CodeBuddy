@@ -15,7 +15,7 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
     this._view = webviewView;
 
     webviewView.webview.options = {
-      // Allow scripts in the webview
+      // Allow scripts in the webviews
       enableScripts: true,
       localResourceRoots: [this._extensionUri],
     };
