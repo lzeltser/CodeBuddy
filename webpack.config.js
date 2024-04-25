@@ -1,4 +1,4 @@
-//@ts-check yes
+//@ts-check 
 
 'use strict';
 
